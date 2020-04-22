@@ -1,10 +1,18 @@
 #
 # An example demonstrating interactive clicking
 #
+# Recommend to use an interactive iPython environment
+# Or, in command line, do $ ipython -i clicking.py
+#
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+matplotlib.interactive(True)
 
+#
+# Change all my_* variables to your data
+#
 my_x = np.linspace(-5, 5, 100)
 my_map = np.random.rand(10, 10)
 
@@ -16,13 +24,14 @@ class PointMover:
         #
         # Some map. Replace it with your own.
         #
-        cax = self.ax[0].imshow(my_map, origin='lower',
-                                cmap='inferno')
-        plt.colorbar(cax, ax=self.ax[0])
+        im = self.ax[0].imshow(my_map, origin='lower',
+                               cmap='inferno')
+        plt.colorbar(im, ax=self.ax[0])
         #
         # Create the clicking point
         #
         self.point, = self.ax[0].plot([0], [0], 'c*')
+        plt.draw()
         plt.show()
         #
         # Link the class to clicking event
@@ -57,4 +66,6 @@ class PointMover:
         plt.draw()
 
 
-pointmover = PointMover()
+if __name__ == '__main__':
+    pointmover = PointMover()
+
